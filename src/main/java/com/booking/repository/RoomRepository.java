@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query("""
@@ -14,4 +15,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     LEFT JOIN FETCH rt.amenities
 """)
     List<Room> findAllRooms(RoomStatus status);
+
+    Optional<Room> findByRoomNumber(String roomNumber);
 }

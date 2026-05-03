@@ -2,15 +2,13 @@ package com.booking.controller;
 
 
 import com.booking.common.response.BaseResponse;
+import com.booking.domain.dto.room.RoomRequest;
 import com.booking.domain.dto.room.RoomResponse;
 import com.booking.domain.dto.room.RoomTypeDto;
 import com.booking.service.room.RoomService;
 import com.booking.service.room.RoomTypeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,13 @@ public class RoomController {
             @RequestParam(required = false) String status
     ){
         return BaseResponse.success(roomService.getAllRooms(status));
+    }
+
+    @PostMapping("/rooms")
+    public BaseResponse<RoomResponse> createRoom(
+            @RequestBody RoomRequest roomRequest
+    ){
+        return BaseResponse.success(roomService.createRoom(roomRequest));
     }
 
     @GetMapping("/room/{id}")
