@@ -1,7 +1,6 @@
 package com.booking.service.booking.impl;
 
 import com.booking.common.enums.BookingStatus;
-import com.booking.common.enums.RoomStatus;
 import com.booking.common.exception.AppException;
 import com.booking.domain.dto.booking.BookingResponse;
 import com.booking.domain.entity.Booking;
