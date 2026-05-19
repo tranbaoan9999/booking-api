@@ -10,6 +10,7 @@ import com.booking.service.room.RoomTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,15 @@ public class RoomController {
             @RequestParam(required = false) String status
     ){
         return BaseResponse.success(roomService.getAllRooms(status));
+    }
+
+    @GetMapping("/rooms/available")
+    public BaseResponse<List<RoomResponse>> getAvaliableRooms(
+            @RequestParam LocalDate checkin,
+            @RequestParam LocalDate checkout,
+            @RequestParam(required = false) Integer guest
+            ){
+        return BaseResponse.success(roomService.getAvailableRooms(checkin, checkout,guest));
     }
 
     @PostMapping("/rooms")

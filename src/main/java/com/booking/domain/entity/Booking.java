@@ -26,8 +26,8 @@ public class Booking {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private Integer numberOfGuests;
 
     @Enumerated(EnumType.STRING)

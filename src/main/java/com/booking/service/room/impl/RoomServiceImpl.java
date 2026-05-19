@@ -15,6 +15,7 @@ import com.booking.service.room.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -72,6 +73,18 @@ public class RoomServiceImpl implements RoomService {
         room.setRoomType(roomType);
         Room savedRoom = roomRepository.save(room);
         return roomMapper.toResponse(savedRoom);
+    }
+
+    @Override
+    public List<RoomResponse> getAvailableRooms(LocalDate checkin, LocalDate checkout, Integer guest) {
+        if (!checkout.isAfter(checkin)) {
+            throw new AppException( 400,
+                    "Checkout date must be after checkin date"
+            );
+        }
+        List<Room> rooms = roomRepository.findAvailableRooms(checkin, checkout, guest);
+        return rooms.stream().map(roomMapper::toResponse).toList();
+
     }
 
     private void validateRequest(RoomRequest request) {
