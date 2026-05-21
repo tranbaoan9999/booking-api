@@ -49,7 +49,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(
                 List.of(
                         "http://localhost:3000",
-                        "https://your-app.vercel.app"
+                        "https://booking-web-inky.vercel.app/"
                 )
         );
 
