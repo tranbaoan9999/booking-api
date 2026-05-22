@@ -12,6 +12,8 @@ import com.booking.repository.RoomRepository;
 import com.booking.repository.RoomTypeRepository;
 import com.booking.service.room.RoomMapper;
 import com.booking.service.room.RoomService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +36,13 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @Cacheable(
+            value = "rooms",
+            key = "#status != null ? #status : 'ALL'"
+    )
     public List<RoomResponse> getAllRooms(String status) {
         List<Room> rooms;
-
+        System.out.println("QUERY DB");
         if(status != null) {
             rooms = roomRepository.findAllRooms(parseStatus(status));
         } else{
@@ -54,6 +60,10 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @CacheEvict(
+            value = "rooms",
+            allEntries = true
+    )
     public RoomResponse createRoom(RoomRequest roomRequest) {
         roomRepository.findByRoomNumber(roomRequest.getRoomNumber())
                 .ifPresent(r -> {

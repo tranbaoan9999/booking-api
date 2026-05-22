@@ -17,10 +17,10 @@ public class GlobalExceptionHandler {
     }
 
     // SYSTEM ERROR
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<BaseResponse<?>> handleException(Exception ex) {
-        return ResponseEntity
-                .internalServerError()
-                .body(BaseResponse.error("Internal Server Error"));
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<BaseResponse<?>> handleException(Exception ex) {
+//        return ResponseEntity
+//                .internalServerError()
+//                .body(BaseResponse.error("Internal Server Error"));
+//    }
 }
