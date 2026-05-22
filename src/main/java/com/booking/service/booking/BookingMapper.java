@@ -31,7 +31,6 @@ public class BookingMapper {
         }
         if(booking.getGuest() != null){
             res.setGuest(mapGuest(booking.getGuest()));
-            res.setGuest(mapGuest(booking.getGuest()));
         }
         return res;
     }
@@ -63,7 +62,7 @@ public class BookingMapper {
         dto.setId(guest.getId());
         dto.setEmail(guest.getEmail());
         dto.setPhone(guest.getPhone());
-
+        dto.setName(guest.getName());
         return dto;
     }
 }
