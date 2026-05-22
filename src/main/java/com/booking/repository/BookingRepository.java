@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
@@ -26,4 +27,17 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     LEFT JOIN FETCH b.guest
 """)
     List<Booking> getAllBookings();
+
+    @Query("""
+    SELECT CASE WHEN COUNT(b) > 0 THEN true ELSE false END
+    FROM Booking b
+    where b.room.id = :roomId
+    AND b.status != 'CANCELLED'
+    AND (
+        b.checkIn < :checkOut AND b.checkOut > :checkIn
+    )
+""")
+    Boolean existsOverlappingBooking(Long roomId,
+                                     LocalDate checkIn,
+                                     LocalDate checkOut);
 }

@@ -62,6 +62,20 @@ public class BookingServiceImpl implements BookingService {
         Guest guest = guestRepository.findById(request.getGuestId())
                 .orElseThrow(() -> new AppException(400, "Guest not found, Please login to continue"));
 
+        System.out.println(bookingRepository.existsOverlappingBooking(
+                request.getRoomId(),
+                request.getCheckIn(),
+                request.getCheckOut()
+        ));
+
+        if (bookingRepository.existsOverlappingBooking(
+                request.getRoomId(),
+                request.getCheckIn(),
+                request.getCheckOut()
+        )) {
+            throw new AppException(409, "Room is already booked in this time range");
+        }
+
         Booking booking = new Booking();
         booking.setRoom(room);
         booking.setCheckIn(request.getCheckIn());
