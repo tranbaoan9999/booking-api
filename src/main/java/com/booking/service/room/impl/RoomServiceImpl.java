@@ -84,7 +84,6 @@ public class RoomServiceImpl implements RoomService {
         }
         List<Room> rooms = roomRepository.findAvailableRooms(checkin, checkout, guest);
         return rooms.stream().map(roomMapper::toResponse).toList();
-
     }
 
     private void validateRequest(RoomRequest request) {
