@@ -6,6 +6,7 @@ import com.booking.domain.entity.Room;
 import com.booking.domain.entity.RoomImage;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -46,9 +47,12 @@ public class RoomMapper {
         }
 
         if(room.getRoomImages() != null){
-            List<String> imageUrls = room.getRoomImages()
-                                            .stream().map(RoomImage::getImageUrl)
-                                            .toList();
+            List<String> imageUrls = new ArrayList<>(
+                    room.getRoomImages()
+                            .stream()
+                            .map(RoomImage::getImageUrl)
+                            .toList()
+            );
             res.setImageUrls(imageUrls);
         }
         return res;
