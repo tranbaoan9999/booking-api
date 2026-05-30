@@ -3,8 +3,11 @@ package com.booking.service.room;
 import com.booking.domain.dto.room.RoomResponse;
 import com.booking.domain.dto.room.RoomTypeDto;
 import com.booking.domain.entity.Room;
+import com.booking.domain.entity.RoomImage;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,6 +43,13 @@ public class RoomMapper {
                         .collect(Collectors.toSet());
                 res.setAmenities(amenities);
             }
+        }
+
+        if(room.getRoomImages() != null){
+            List<String> imageUrls = room.getRoomImages()
+                                            .stream().map(RoomImage::getImageUrl)
+                                            .toList();
+            res.setImageUrls(imageUrls);
         }
         return res;
     }

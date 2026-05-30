@@ -10,6 +10,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -30,6 +34,12 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+
+    @OneToMany(
+            mappedBy = "room",
+            cascade = CascadeType.ALL
+    )
+    private List<RoomImage> roomImages = new ArrayList<>();
 
     @CreatedDate
     private LocalDateTime createdAt;
