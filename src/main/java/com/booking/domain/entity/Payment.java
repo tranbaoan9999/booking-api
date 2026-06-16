@@ -5,6 +5,7 @@ import com.booking.common.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
@@ -36,9 +37,8 @@ public class Payment {
 
     private BigDecimal amount;
 
+    @CreatedDate
     private LocalDateTime submittedAt;
-
-    private LocalDateTime reviewedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewed_by")
