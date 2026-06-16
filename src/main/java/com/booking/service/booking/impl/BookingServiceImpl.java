@@ -96,4 +96,12 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.save(booking);
         return bookingMapper.toResponse(booking);
     }
+
+    @Override
+    public BookingResponse getBookingDetail(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new  AppException(404, "Booking not found"));
+
+        return bookingMapper.toResponse(booking);
+    }
 }

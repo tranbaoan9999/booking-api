@@ -26,4 +26,11 @@ public class BookingController {
     ){
         return BaseResponse.success(bookingService.newBooking(request));
     }
+
+    @GetMapping("/booking/booking-detail")
+    public BaseResponse<BookingResponse> getBookingDetails(
+            @RequestParam Long bookingId
+    ){
+        return BaseResponse.success(bookingService.getBookingDetail(bookingId));
+    }
 }

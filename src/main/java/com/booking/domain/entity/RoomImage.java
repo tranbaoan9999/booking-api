@@ -27,7 +27,7 @@ public class RoomImage {
     @Column(name = "is_thumbnail")
     private boolean isThumbnail;
 
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url", nullable = false, columnDefinition = "TEXT")
     private String imageUrl;
 
     @CreatedDate
