@@ -48,4 +48,10 @@ public class Booking {
     private LocalDateTime updatedAt;
 
     private BigDecimal totalPrice;
+
+    @OneToOne(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL
+    )
+    private Payment payment;
 }
