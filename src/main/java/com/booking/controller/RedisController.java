@@ -21,10 +21,17 @@ public class RedisController {
     }
 
     @GetMapping("/value")
-    public Object getValue(
+    public Map<String, Object> getValue(
             @RequestParam String key
     ) {
-        return redisTemplate.opsForValue().get(key);
+
+        Object value =
+                redisTemplate.opsForValue().get(key);
+        return Map.of(
+                "key", key,
+                "exists", value != null,
+                "value", value
+        );
     }
 
     @GetMapping("/ttl")
